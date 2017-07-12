@@ -7,16 +7,5 @@ module.exports = (sequelize, DataTypes) => {
 		},
 	});
 
-
-	// Genre.sync({ force: true }).then(() => {
-	// 	// force: true will drop the table if it already exists
-	// 	Genre.sync().then(() => {
-	// 		// Table created
-	// 		return Genre.create({
-	// 			name: "thriller"
-	// 		});
-	// 	});
-	// });
-
 	return Genre;
 }

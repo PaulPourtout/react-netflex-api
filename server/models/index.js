@@ -29,15 +29,15 @@ db.PictureGenre = require('./picture_genre.js')(sequelize, Sequelize);
 
 // Associations
 db.Genre.belongsToMany(db.Picture, {
-	through: db.PictureGenre,
-	foreignKey: 'genre_id',
+	through: 'picture_genres',
+	foreignKey: 'picture_id',
 	as: 'Picture'
 });
 
 db.Picture.belongsToMany(db.Genre, {
-	through: db.PictureGenre,
-	foreignKey: 'picture_id',
-	as: 'Genre'
+	through: 'picture_genres',
+	foreignKey: 'genre_id',
+	as: 'genres'
 });
 
 

@@ -31,7 +31,6 @@ const initServer = () => {
 	apiRouter.post('/user', (req, res) => users.addOne(req, res));
 
 	// Auth
-	// apiRouter.get('/signup', (req, res) => authController.signup(req, res));
 	apiRouter.post('/signup', passport.authenticate('local-signup', {
 		// successRedirect: '/connected',
 		successFlash: 'Welcome!',
@@ -42,7 +41,7 @@ const initServer = () => {
 
 
 
-db.sequelize.sync({ force: false })
+db.sequelize.sync({ force: true })
 	.then(() => {
 		console.log("The database looks fine");
 		initServer();

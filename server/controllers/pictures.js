@@ -3,10 +3,9 @@ module.exports = (db) => {
 		getAll: (req, res) => {
 			db.Picture.findAll({
 				include: [
-					{ model: db.Genre, as: 'Genre' },
+					{ model: db.Genre, as: 'genres' },
 				]
 			})
-				// db.Picture.findAll()
 				.then(pictures => res.send(pictures))
 				.catch(err => console.log('error :', err));
 		},
@@ -18,19 +17,22 @@ module.exports = (db) => {
 		},
 
 		addOne: (req, res) => {
-			db.Picture.create({
+			const picture = db.Picture.create({
 				title: req.body.title,
 				image: req.body.image,
+
 				description: req.body.description,
 				duration: req.body.duration,
-				genres: req.body.genres,
+				// genres: req.body.genres,
 			},
-				{
-					include: [{
-						model: db.Genre,
-						as: 'Genre'
-					}]
-				})
+				// {
+				// 	include: [{
+				// 		model: db.Genre,
+				// 		as: 'genres'
+				// 	}]
+				// }
+			)
+				.then(picture => picture.addGenre(req.body.genres))
 				.then(picture => res.send(picture))
 				.catch(err => console.log('error :', err));
 		},
@@ -38,7 +40,6 @@ module.exports = (db) => {
 		deleteOnePicture: (req, res) => {
 
 		}
-
 	}
 
 	return pictures;
